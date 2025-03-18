@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Style Login/Signup</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .neon-text {
+      color: #00ff99;
+      text-shadow: 2px 2px 12px #00ff99;
+    }
+    
+    .neon-input {
+      border: 2px solid #00ff99;
+      box-shadow: 0 0 5px #00ff99, 0 0 25px #00ff99, 0 0 50px #00ff99;
+    }
+
+    .neon-input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 40px #00ff99;
+    }
+    
+    .neon-button {
+      background-color: transparent;
+      border: 2px solid #00ff99;
+      color: #00ff99;
+      padding: 10px 20px;
+      transition: 0.2s;
+    }
+
+    .neon-button:hover {
+      background-color: #00ff99;
+      color: #000;
+    }
+
+    .neon-link {
+      color: #00ff99;
+      text-decoration: none;
+      border: 2px solid #00ff99;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      transition: 0.2s;
+    }
+
+    .neon-link:hover {
+      background-color: #00ff99;
+      color: #000;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen p-4">
+  <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div class="form-container">
+
+      <div id="loginForm" class="space-y-6">
+        <h2 class="neon-text text-2xl font-bold">Login</h2>
+        <input type="text" id="loginUser" placeholder="Username" class="neon-input w-full p-2 bg-transparent text-white placeholder-white">
+        <input type="password" id="loginPass" placeholder="Password" class="neon-input w-full p-2 bg-transparent text-white placeholder-white">
+        <button onclick="login()" class="neon-button w-full">Login</button>
+      </div>
+
+      <div id="signupForm" class="space-y-6 hidden">
+        <h2 class="neon-text text-2xl font-bold">Sign Up</h2>
+        <input type="text" id="signupUser" placeholder="Username" class="neon-input w-full p-2 bg-transparent text-white placeholder-white">
+        <input type="password" id="signupPass" placeholder="Password" class="neon-input w-full p-2 bg-transparent text-white placeholder-white">
+        <button onclick="signup()" class="neon-button w-full">Sign Up</button>
+      </div>
+
+      <div class="flex justify-center space-x-4 mt-4">
+        <button onclick="toggleForm()" class="neon-button">Switch to Signup/Login</button>
+      </div>
+
+      <div class="flex justify-center mt-8">
+        <a href="https://cybersamuzax.github.io/aibotabnme/" target="_blank" class="neon-link">Open External Link</a>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    function toggleForm() {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      loginForm.classList.toggle('hidden');
+      signupForm.classList.toggle('hidden');
+    }
+
+function login() {
+  const username = document.getElementById('loginUser').value;
+  const password = document.getElementById('loginPass').value;
+  const storedUser = localStorage.getItem(username);
+
+  if (storedUser && JSON.parse(storedUser).password === password) {
+    alert('Login successful!');
+    window.location.href = 'https://cybersamuzax.github.io/aibotabnme/';
+  } else {
+    alert('Invalid username or password.');
+  }
+}
+
+function signup() {
+  const username = document.getElementById('signupUser').value;
+  const password = document.getElementById('signupPass').value;
+
+  if (localStorage.getItem(username)) {
+    alert('Username already exists.');
+  } else {
+    localStorage.setItem(username, JSON.stringify({ password: password }));
+    alert('Signup successful! Redirecting to your website...');
+    window.location.href = 'https://cybersamuzax.github.io/aibotabnme/';
+  }
+}
+    
+  </script>
+</body>
+</html>
